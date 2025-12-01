@@ -1,0 +1,46 @@
+===== Level1 v2 Report =====
+Date: Mon Dec  1 15:38:23 IST 2025
+
+Script dir: /c/Users/USER/Linux-Booklet
+
+---- Group 'devs' ----
+Group devs not present
+
+---- Users sample ----
+User alice: not present
+User bob: not present
+User carol: not present
+
+---- Project directories ----
+/srv/project: not present
+/opt/project: not present
+
+---- Packages / versions ----
+git version 2.37.1.windows.1
+nginx: not found or no permission
+java: not found or no permission
+
+---- system info ----
+MemTotal:       12356424 kB
+MemFree:         6779628 kB
+HighTotal:             0 kB
+HighFree:              0 kB
+LowTotal:       12356424 kB
+LowFree:         6779628 kB
+SwapTotal:       1900544 kB
+SwapFree:        1788296 kB
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 78
+model name	: Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz
+stepping	: 3
+microcode	: 0xCC
+cpu MHz		: 2000.000
+cache size	: 3072 KB
+physical id	: 0
+lsblk not available
+Filesystem            Size  Used Avail Use% Mounted on
+C:/Program Files/Git  173G  113G   60G  66% /
+E:                    391G   17G  375G   5% /e
+F:                    391G  122G  270G  32% /f

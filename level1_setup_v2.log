@@ -1,0 +1,8 @@
+=== Level1 v2 started at Mon Dec  1 15:38:23 IST 2025 ===
+Not running as root — skipping system-level steps (group/user/dirs/install).
+Wrote ROADMAP.md to /c/Users/USER/Linux-Booklet/ROADMAP.md
+Wrote README.md to /c/Users/USER/Linux-Booklet/README.md
+./setup_level1_v2.sh: line 146: getent: command not found
+Wrote level1_report.txt to /c/Users/USER/Linux-Booklet/level1_report.txt
+=== Level1 v2 completed at Mon Dec  1 15:38:24 IST 2025 ===
+Log file: /c/Users/USER/Linux-Booklet/level1_setup_v2.log
