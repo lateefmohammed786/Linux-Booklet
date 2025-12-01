@@ -88,97 +88,97 @@ enable_start_service() {
 DISTRO="$(detect_distro)"
 echo "Detected distro: $DISTRO"
 
-if ! is_root; then
-  echo "NOTE: Running as non-root; some operations (package installs, systemctl, groupadd) will fail unless you run as root."
+OAOAOAOAif ! is_root; then
+OAOAOA  echo "NOTE: Running as non-root; some operations (package installs, systemctl, groupadd) will fail unless you run as root."
 fi
-
-# 1) Create group if missing
-if getent group "$GROUP" >/dev/null 2>&1; then
-  echo "Group $GROUP already exists"
-else
+OAOAOAOAOA
+OAOAOAOAOAOAOAOAOAOAOA# 1) Create group if missing
+OAOAOAif getent group "$GROUP" >/dev/null 2>&1; then
+OAOAOA  echo "Group $GROUP already exists"
+OAOAOAOAOAOAelse
   if is_root; then
-    groupadd "$GROUP"
-    echo "Created group $GROUP"
+OAOAOAOAOAOAOA    groupadd "$GROUP"
+OAOAOAOAOAOAOAOAOAOAOAOAOAOA    echo "Created group $GROUP"
   else
     echo "Skipping groupadd: not running as root"
-  fi
-fi
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOA  fi
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAfi
 
-# 2) Create users and add to group
+OAOAOAOAOAOAOAOAOAOAOAOA# 2) Create users and add to group
 IFS=',' read -r -a user_array <<< "$USERS"
-for u in "${user_array[@]}"; do
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAfor u in "${user_array[@]}"; do
   u_trim="$(echo "$u" | xargs)"
   [ -z "$u_trim" ] && continue
   if id "$u_trim" >/dev/null 2>&1; then
-    echo "User $u_trim exists — ensuring membership in $GROUP"
-    if is_root; then
-      usermod -aG "$GROUP" "$u_trim" || true
+OAOAOA    echo "User $u_trim exists — ensuring membership in $GROUP"
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOA    if is_root; then
+OAOA      usermod -aG "$GROUP" "$u_trim" || true
     fi
-  else
+[5~OAOA  else
     if is_root; then
       useradd -m -s "$SHELL_FOR_USERS" -G "$GROUP" "$u_trim"
       echo "Created user $u_trim and added to $GROUP"
-      mkdir -p "/home/$u_trim/.ssh"
-      chmod 700 "/home/$u_trim/.ssh"
+OAOAOAOAOAOA      mkdir -p "/home/$u_trim/.ssh"
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOA      chmod 700 "/home/$u_trim/.ssh"
       chown -R "$u_trim:$u_trim" "/home/$u_trim/.ssh"
       echo "Created /home/$u_trim/.ssh (no keys installed)"
-    else
-      echo "Cannot create user $u_trim: not running as root"
+OAOAOAOAOAOAOAOAOAOAOAOAOA    else
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOA      echo "Cannot create user $u_trim: not running as root"
     fi
-  fi
+OAOAOAOAOAOAOAOAOAOA  fi
 done
-
+[5~
 # 3) Setup project directories with permissions
-IFS=',' read -r -a proj_array <<< "$PROJECT_DIRS"
-for d in "${proj_array[@]}"; do
-  d_trim="$(echo "$d" | xargs)"
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAIFS=',' read -r -a proj_array <<< "$PROJECT_DIRS"
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAfor d in "${proj_array[@]}"; do
+OAOAOA  d_trim="$(echo "$d" | xargs)"
   [ -z "$d_trim" ] && continue
-  if is_root; then
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOA  if is_root; then
     mkdir -p "$d_trim"
-    chown root:"$GROUP" "$d_trim"
-    chmod 2775 "$d_trim"  # setgid
+[5~OAOAOAOAOAOAOAOA    chown root:"$GROUP" "$d_trim"
+OAOAOA    chmod 2775 "$d_trim"  # setgid
     echo "Prepared project dir $d_trim (owner root:$GROUP, perms 2775)"
   else
-    echo "Skipping directory creation $d_trim: not running as root"
+[5~OAOAOAOA    echo "Skipping directory creation $d_trim: not running as root"
   fi
-done
-
-# 4) Install packages: git, nginx, java (OpenJDK)
-case "$DISTRO" in
-  ubuntu|debian)
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAdone
+OAOAOAOAOAOA
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOA# 4) Install packages: git, nginx, java (OpenJDK)
+OAOAOAOAOAOAOAOAOAOAcase "$DISTRO" in
+[5~OAOAOAOAOAOA  ubuntu|debian)
     install_pkgs git nginx openjdk-11-jdk || install_pkgs git nginx default-jdk
-    ;;
+[5~OAOAOAOAOAOAOAOAOAOAOAOAOA    ;;
   centos|rhel|ol|rocky|fedora)
     install_pkgs git nginx java-11-openjdk-devel
     ;;
   *)
     install_pkgs git nginx openjdk-11-jdk || echo "Please install git, nginx, and Java manually"
     ;;
-esac
-
-# 5) Enable & start nginx if possible
+OAOAOAOAOAOAOAOAOAOAOAOAOAesac
+OAOAOAOAOAOA
+OAOAOAOAOAOAOAOAOAOAOAOAOA# 5) Enable & start nginx if possible
 if is_root; then
-  enable_start_service nginx || echo "Could not enable/start nginx"
-else
-  echo "Skipping nginx start (not root)."
+OAOAOAOAOAOAOAOAOAOAOAOAOA  enable_start_service nginx || echo "Could not enable/start nginx"
+[5~OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAelse
+OAOAOAOAOAOAOAOAOAOAOAOAOA  echo "Skipping nginx start (not root)."
 fi
-
+[5~OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOA
 # 6) Basic system info (append to log)
-echo "---- System Information ----"
+[5~OAOAOAOAOAOAOAOAOAOAecho "---- System Information ----"
 echo "Date: $(date)"
 echo "--- Memory ---"
-free -h || true
+[5~OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAfree -h || true
 echo "--- CPU ---"
 if command -v lscpu >/dev/null 2>&1; then
-  lscpu || true
-else
-  cat /proc/cpuinfo | head -n 20 || true
+OAOAOAOAOAOAOAOAOA  lscpu || true
+OAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAOAelse
+OAOAOAOAOAOAOA  cat /proc/cpuinfo | head -n 20 || true
 fi
 echo "--- Disk (lsblk) ---"
-lsblk || true
+OAOAOAOAOAOAOAOAlsblk || true
 echo "--- Filesystems ---"
 df -h || true
-
+[5~OAOAOAOAOAOAOAOAOAOAOAOAOA
 printf "=== Level1 Setup completed at %s ===\n" "$(date)"
 echo "Log written to $LOG"
 

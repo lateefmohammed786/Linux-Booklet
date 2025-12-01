@@ -1,2 +1,0 @@
-# Linux-Booklet
-demo-project
