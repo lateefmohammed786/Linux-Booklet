@@ -32,3 +32,11 @@ Automation scripts for:
 - Performance monitoring
 
 This README includes only the short summary as requested.
+
+What is Linux?
+Linux is an **open-source operating system** widely used in servers, cloud computing, networking, and DevOps.  
+It is built on the Unix philosophy:  
+➡ *"Do one thing but do it well."*
+
+Most cloud providers (AWS, GCP, Azure) run Linux by default.
+
