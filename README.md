@@ -1,19 +1,16 @@
-## 🔗 Important Links
+# linux-server-automation
 
-- **GitHub Repository:**  
-  [Linux-Booklet Repo](https://github.com/lateefmohammed786/Linux-Booklet)
+Project structure:
+basic/
+  - create_users.sh
+  - set_permissions.sh
+  - install_packages.sh
+  - system_info.sh
 
-- **YouTube Demo Video:**  
-  [Watch the Demo](https://youtu.be/your_video_id_here)
+intermediate/
+  - automate_backup.sh
+  - log_cleanup.sh
+  - check_service_status.sh
+  - performance_monitor.sh
 
-- **Screenshots Folder:**  
-  [Open Screenshots](./screenshots/)
-
-- **Automation Script:**  
-  [setup_level1_v2.sh](./setup_level1_v2.sh)
-
-- **Project Roadmap:**  
-  [ROADMAP.md](./ROADMAP.md)
-
-- **Verification Report:**  
-  [level1_report.txt](./level1_report.txt)
+All scripts are small, intended as starting points. Make executable and run as root where required.
