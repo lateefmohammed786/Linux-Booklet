@@ -75,3 +75,29 @@ tar -czvf "$BACKUP" -C "$(dirname "$SOURCE")" "$(basename "$SOURCE")"
 
 echo "Backup stored at $BACKUP"Script for Automatebackup.sh:
 
+Script for Log Clean up:
+#!/bin/bash
+find /var/log -type f -mtime +7 -exec rm -f {} \;
+echo "old logs cleared"
+
+Script for Running Services:
+#!/bin/bash
+
+SERVICES="nginx ssh"
+
+for svc in $SERVICES; do
+  if systemctl is-active --quiet "$svc"; then
+    echo "$svc is running"
+  else
+    echo "$svc is down"
+  fi
+done
+
+Script for Monitoring Performance:
+#!/bin/bash
+echo "---cpu Load---"; top -b -n1 | head -5
+echo "---Disk Space---"; df -h
+echo "---Memory---"; free -h
+
+
+
